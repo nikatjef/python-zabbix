@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#
+#
+#
+/usr/bin/env python setup.py sdist
+#/usr/bin/env python setup.py --command-packages=stdeb.command bdist_deb
+

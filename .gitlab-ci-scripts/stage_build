@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#
+#
+#
+
+/usr/bin/env virtualenv --no-site-packages .venv/zabbix
+/usr/bin/env virtualenv --relocatable .venv/zabbix
+source .venv/zabbix/bin/activate
+
+/usr/bin/env pip install pytest-cov
+
+for i in `env`; do
+  echo $i
+done

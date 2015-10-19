@@ -1,0 +1,34 @@
+# Ignore any ompiled code.
+*.gem
+*.[oa]
+*.pyc
+
+# Setuptools distribution folder.
+*/build/*
+*/dist/*
+*/deb_dist/*
+
+# Ignore various metadata create by setuptools
+*.egg-info
+
+# Ignore build directories
+/build/
+
+# Ignore common backup extensions
+*~
+*.[bB][aA][kK]
+*.orig
+*.rej
+*.swp
+
+# Ignore any logfiles that may get generated.
+*.log
+
+# Ignore .virtualenv
+.virtualenv/
+/.venv/
+/venv/
+
+/scripts/*
+
+.idea/*

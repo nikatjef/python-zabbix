@@ -1,0 +1,22 @@
+before_script:
+#  - virtualenv --no-site-packages .venv/zabbix
+#  - virtualenv --relocatable .venv/zabbix
+#  - source .venv/zabbix/bin/activate
+
+types:
+  - build
+  - test
+  - deploy
+
+build:
+  script: .gitlab-ci-scripts/stage_build
+  type: build
+
+test:
+  script: .gitlab-ci-scripts/stage_test
+  type: test
+
+deploy:
+  script: .gitlab-ci-scripts/stage_deploy
+  type: deploy
+
