@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 This is a tool created to help troubleshoot some LLD issues with the MySQL
@@ -13,7 +13,7 @@ ZBX_HOST_NOTFOUND = 'Host does not exist in Zabbix.'
 ZBX_HOST_NOACTIVE = 'Host does not have any Zabbix agent (active) checks.'
 ZBX_HOST_REGISTER = 'Host has been registered.'
 ZBX_HOST_DIDEXIST = 'Host already exists.'
-ZBX_HOST_UNKNWON  = 'Unable to determine if the host is registerd or not.'
+ZBX_HOST_UNKNOWN  = 'Unable to determine if the host is registerd or not.'
 
 def main():
   print get_ActiveItemList()
@@ -57,11 +57,12 @@ def get_ActiveItemList(**kwargs):
       return ZBX_HOST_REGISTER
     else:
       return ZBX_HOST_UNKNOWN
-  
+
   if size == 8:
     return ZBX_HOST_NOACTIVE
 
   return [x.rsplit(':',2) for x in content.split('\n') if x != 'ZBX_EOF' and len(x) > 1]
+
 
 if __name__ == '__main__':
   sys.exit(main())

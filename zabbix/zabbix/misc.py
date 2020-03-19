@@ -1,23 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 This initializes the zabbix module and provides a few minor tools.
 """
-#from .version import __version__
-#from .sender import Sender
-#from .get_AgentConfig import get_AgentConfig
-
-import socket
-
-__zabbix_serv_conf__ = '/etc/zabbix/zabbix_server.conf'
-__zabbix_serv_addr__ = '127.0.0.1'
-__zabbix_serv_port__ = 10051
-
-__zabbix_agnt_conf__ = '/etc/zabbix/zabbix_agentd.conf'
-__zabbix_agnt_addr__ = 'Zabbix server'
-__zabbix_agnt_port__ = 10050
-
-__zabbix_node_name__ = socket.getfqdn()
 
 
 def __gen_zabbix_key(container, *args):
@@ -28,13 +13,14 @@ def __gen_zabbix_key(container, *args):
   The first argument passed will be treated as the primary key, while
   all subsequent arguments will be treated as arguments to to the
   primary key.  For example;
-    >>> zabbix.__gen_zabbix_key('box','red','wagon')
+    >>> import zabbix
+    >>> zabbix.misc.__gen_zabbix_key('box','red','wagon')
     'box[red,wagon]'
 
   This tool does require at least a single argument, which is used as
   the primary key.  If no further arguments are passed, the tool will
   return just the single argument;
-    >>> zabbix.__gen_zabbix_key('box')
+    >>> zabbix.misc.__gen_zabbix_key('box')
     'box'
   """
   if len(args) == 0:
@@ -42,13 +28,13 @@ def __gen_zabbix_key(container, *args):
 
   return '{}[{}]'.format(container, ','.join(args))
 
+
 def __query_rest_service(**kwargs):
   """
   Simple function to query rest services. It's not real efficient, but I
   found myself using the same code snippet over and over again.
   """
   import json
-
   import requests
 
   from requests.auth import HTTPBasicAuth
@@ -79,7 +65,7 @@ def __query_rest_service(**kwargs):
         )
       )
 
-  print service_request.text
+  print(service_request.text)
   data_type = kwargs.get('data_type', 'json')
   if data_type == 'json':
     retval = json.loads(service_request.text)
@@ -90,12 +76,14 @@ def __query_rest_service(**kwargs):
 
   return retval
 
+
 def version_compare(ver_string_a, ver_string_b):
   """
   Simple function to normalize the standard notation version strings
   and compare them.
   """
   import re
+
   def normalize(version):
     """
     This will normalize the values.
@@ -103,6 +91,7 @@ def version_compare(ver_string_a, ver_string_b):
     return [int(x) for x in re.sub(r'(\.0+)*$', '', version).split(".")]
 
   return cmp(normalize(ver_string_a), normalize(ver_string_b))
+
 
 def flatten(d, parent_key='', sep='_'):
   import collections

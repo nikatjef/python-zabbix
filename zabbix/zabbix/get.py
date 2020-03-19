@@ -1,8 +1,11 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Simple lib to connect to a Zabbix agent and request the value of an item.
 """
+import socket
+
+
 def query_agent(**kwargs):
   """
   Open a socket to port 10050 on the remote server and query for the number of

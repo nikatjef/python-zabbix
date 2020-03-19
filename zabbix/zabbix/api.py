@@ -1,12 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 """
 import hashlib
 import json
 import logging
 import sys
-
-
 
 
 class ZabbixAPIException(Exception):
@@ -17,6 +15,7 @@ class ZabbixAPIException(Exception):
     -32500 - No Permission
   """
   pass
+
 
 class AlreadyExists(ZabbixAPIException):
   """
@@ -56,7 +55,7 @@ class ZabbixAPI(object):
     """
     self.log_level = kwargs.get('log_level', logging.WARNING)
     self.logger = logging.StreamHandler(sys.stdout)
-    
+
     self.timeout = kwargs.get('timeout', 10)
 
     self.zabbix['host'] = kwargs.get('zabbix_host', 'localhost')
@@ -94,7 +93,6 @@ class ZabbixAPI(object):
 
     return json.dumps(obj)
 
- 
   def login(self, **kwargs):
     """
     """
@@ -105,6 +103,7 @@ class ZabbixAPI(object):
         )
 
     self.debug(logging.DEBUG,auth_obj)
+
 
 if __name__ == '__main__':
   foo = ZabbixAPI()
